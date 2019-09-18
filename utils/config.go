@@ -20,11 +20,9 @@ type SectionHttp struct {
 }
 
 /*资源预加载*/
-func LoadConf(){
-	var BasePath, ConfPath string
-	BasePath = "/app/server"
-	ConfPath = BasePath + "/conf"
-	absPath, _ := filepath.Abs(ConfPath)
+func LoadConf(basePath string){
+	confPath := basePath + "/conf"
+	absPath, _ := filepath.Abs(confPath)
 	fmt.Println(absPath + `/config.json`)
 	viper.SetConfigFile(absPath + `/config.json`)
 	err := viper.ReadInConfig()

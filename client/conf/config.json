@@ -1,0 +1,10 @@
+{
+    "server":
+    {
+        "tips": true,
+        "watchLogicYaml": true,
+        "address": ":6364",
+        "readtimeout" : 10,
+        "writetimeout" : 10
+    }
+}

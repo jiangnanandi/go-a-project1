@@ -1,0 +1,18 @@
+<seelog minlevel="info">
+    <!-- 输出 -->
+    <outputs formatid="main">
+        <buffered size="102400" flushperiod="2000">
+            <file path="./log/server.log" />
+        </buffered>
+        <!-- 输出：控制台 -->
+        <!--<console/>-->
+        <!-- 过滤日志级别 -->
+        <filter levels="error,critical">
+            <file path="./log/server.err.log" />
+        </filter>
+    </outputs>
+    <formats>
+        <!-- 设置格式 -->
+        <format id="main" format="[%LEVEL]: %Date %Time [%Func:%Line] %Msg%n"/>
+    </formats>
+</seelog>

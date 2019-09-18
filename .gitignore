@@ -8,6 +8,8 @@
 *.dockerfile
 id_rsa
 reflex.conf
+server/server
+client/client
 
 # Test binary, build with `go test -c`
 *.test

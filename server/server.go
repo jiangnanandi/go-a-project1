@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	utils.LoadConf()
+	utils.LoadConf("/app/server")
 	log.LoggerFromConfigAsFile("./conf/log.xml")
 	defer log.Flush()
 	httpman.Run(router.SetupRouter)
