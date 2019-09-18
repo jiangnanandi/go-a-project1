@@ -14,7 +14,7 @@ func Recovery() gin.HandlerFunc {
 		defer func() {
 			if err := recover(); err != nil {
 				httprequest, _ := httputil.DumpRequest(c.Request, false)
-				log.Panicf("panic recovered:httprequest[%s] err[%s] stack[%s]", string(httprequest), err, string(debug.Stack()))
+				log.Error("panic recovered:httprequest[%s] err[%s] stack[%s]", string(httprequest), err, string(debug.Stack()))
 				c.String(http.StatusOK, `{"errNo":99999,"errStr":"unknow_error","data":{}}`)
 				c.Abort()
 			}

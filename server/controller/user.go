@@ -5,5 +5,5 @@ import (
 )
 
 func GetUser(ct *gin.Context){
-	
+	ct.String(200, "scusses")
 }

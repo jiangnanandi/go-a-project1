@@ -2,8 +2,9 @@ package utils
 
 import (
 	"fmt"
-
+	"path/filepath"
 	"github.com/spf13/viper"
+	log "github.com/cihub/seelog"
 )
 
 type ConfYaml struct {
@@ -18,33 +19,16 @@ type SectionHttp struct {
 	WriteTimeout int    `yaml:"writetimeout"`
 }
 
-var configPath string
-
-func SetGlobalConfPath(path string) {
-	configPath = path
-}
-
-func GetGlobalConfPath() string {
-	return configPath
-}
-
-func LoadConf() (ConfYaml, error) {
-	var conf ConfYaml
-	//设定文件格式
-	viper.SetConfigType("yaml")
-	viper.AddConfigPath(configPath)
-	// 打开配置
-	if err := viper.ReadInConfig(); err != nil {
-		return conf, err
-	} else {
-		fmt.Println("Using config.go file:", viper.ConfigFileUsed())
+/*资源预加载*/
+func LoadConf(){
+	var BasePath, ConfPath string
+	BasePath = "/app/server"
+	ConfPath = BasePath + "/conf"
+	absPath, _ := filepath.Abs(ConfPath)
+	fmt.Println(absPath + `/config.json`)
+	viper.SetConfigFile(absPath + `/config.json`)
+	err := viper.ReadInConfig()
+	if err != nil {
+		log.Error(err)
 	}
-
-	// Web
-	conf.Http.Address = viper.GetString("Http.address")
-	conf.Http.Port = viper.GetString("Http.port")
-	conf.Http.ReadTimeout = viper.GetInt("Http.readtimeout")
-	conf.Http.WriteTimeout = viper.GetInt("Http.writetimeout")
-
-	return conf, nil
 }
